@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AB Gebäudetechnik | Moderne Haustechnik in Klagenfurt</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
+    <style>
+        :root {
+            /* Colors */
+            --color-bg: #F8F9FA;
+            --color-surface: #FFFFFF;
+            --color-text: #1A202C;
+            --color-text-muted: #4A5568;
+            --color-accent: #0077B6;
+            --color-accent-light: #E6F2F8;
+            --color-alert: #E53E3E;
+            --color-footer-bg: #11151D;
+            
+            /* Typography */
+            --font-heading: 'Space Grotesk', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            
+            --text-xs: clamp(0.75rem, 1.5vw, 0.875rem);
+            --text-sm: clamp(0.875rem, 1.8vw, 1rem);
+            --text-base: clamp(1rem, 2vw, 1.125rem);
+            --text-lg: clamp(1.125rem, 2.5vw, 1.375rem);
+            --text-xl: clamp(1.375rem, 3vw, 1.75rem);
+            --text-2xl: clamp(1.75rem, 4vw, 2.5rem);
+            --text-3xl: clamp(2.25rem, 5vw, 3.5rem);
+            --text-4xl: clamp(3rem, 7vw, 4.5rem);
+            
+            /* Spacing */
+            --space-1: 0.25rem;
+            --space-2: 0.5rem;
+            --space-3: 0.75rem;
+            --space-4: 1rem;
+            --space-6: 1.5rem;
+            --space-8: 2rem;
+            --space-12: 3rem;
+            --space-16: 4rem;
+            --space-24: 6rem;
+            
+            --section-padding: clamp(4rem, 10vw, 8rem);
+            
+            /* Z-Index Stack (Custom Props for general use, literals for mobile nav) */
+            --z-base: 0;
+            --z-raised: 10;
+            --z-dropdown: 100;
+            --z-sticky: 200;
+            --z-overlay: 500;
+            --z-modal: 1000;
+            --z-toast: 2000;
+        }
+
+        /* Reset & Base */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 100%;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* Typography Elements */
+        h1, h2, h3, h4, .font-heading {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            color: var(--color-text);
+        }
+
+        h1 { font-size: var(--text-4xl); }
+        h2 { font-size: var(--text-3xl); }
+        h3 { font-size: var(--text-2xl); }
+        h4 { font-size: var(--text-xl); }
+
+        p {
+            margin-bottom: var(--space-4);
+            color: var(--color-text-muted);
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Icons */
+        [data-lucide] {
+            display: inline-block;
+            vertical-align: middle;
+            flex-shrink: 0;
+            line-height: 1;
+            pointer-events: none;
+        }
+
+        .icon-text {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5em;
+        }
+
+        /* Layout Utilities */
+        .container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 var(--space-6);
+        }
+
+        section {
+            padding: var(--section-padding) 0;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5em;
+            padding: 0.875rem 1.75rem;
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: var(--text-sm);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border: none;
+            border-radius: 2px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+            z-index: var(--z-raised);
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background-color: var(--color-accent);
+            color: var(--color-surface);
+        }
+        .btn-primary:hover {
+            background-color: #006094;
+            transform: translateY(-2px);
+        }
+
+        .btn-alert {
+            background-color: var(--color-alert);
+            color: var(--color-surface);
+        }
+        .btn-alert:hover {
+            background-color: #C53030;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--color-text);
+            border: 2px solid var(--color-text);
+        }
+        .btn-outline:hover {
+            background-color: var(--color-text);
+            color: var(--color-surface);
+        }
+
+        /* Header & Navigation */
+        .site-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1001; /* Strict requirement */
+            background-color: var(--color-surface);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            transition: padding 0.3s ease, background-color 0.3s ease;
+            padding: var(--space-4) 0;
+        }
+
+        .site-header.scrolled {
+            padding: var(--space-2) 0;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-size: var(--text-xl);
+            font-weight: 700;
+            color: var(--color-text);
+            letter-spacing: -0.02em;
+            z-index: 1002;
+            position: relative;
+        }
+
+        /* Desktop Nav */
+        .desktop-nav {
+            display: none;
+        }
+
+        @media (min-width: 769px) {
+            .desktop-nav {
+                display: flex;
+                align-items: center;
+                gap: var(--space-8);
+            }
+            .nav-links {
+                display: flex;
+                gap: var(--space-6);
+                list-style: none;
+            }
+            .nav-links a {
+                font-family: var(--font-heading);
+                font-weight: 500;
+                font-size: var(--text-sm);
+                color: var(--color-text);
+            }
+            .nav-links a:hover {
+                color: var(--color-accent);
+            }
+        }
+
+        /* Mobile Nav Toggle */
+        .nav-toggle {
+            position: absolute;
+            right: 1.25rem;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1002; /* Strict requirement */
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+        }
+
+        @media (min-width: 769px) {
+            .nav-toggle {
+                display: none;
+                pointer-events: none;
+            }
+        }
+
+        .nav-toggle span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background-color: var(--color-text);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-toggle[aria-expanded="true"] span:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+        }
+        .nav-toggle[aria-expanded="true"] span:nth-child(2) {
+            opacity: 0;
+            transform: scaleX(0);
+        }
+        .nav-toggle[aria-expanded="true"] span:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
+        }
+
+        /* Mobile Overlay */
+        .mobile-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 1000; /* Strict requirement */
+            background-color: var(--color-surface);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .mobile-overlay.is-open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .mobile-nav-links {
+            list-style: none;
+            text-align: center;
+        }
+
+        .mobile-nav-links li {
+            margin: var(--space-4) 0;
+        }
+
+        .mobile-nav-links a {
+            font-family: var(--font-heading);
+            font-size: var(--text-2xl);
+            font-weight: 700;
+            padding: 1rem 0;
+            display: block;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding-top: calc(var(--section-padding) + 80px);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background-color: var(--color-bg);
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--space-12);
+            align-items: center;
+        }
+
+        @media (min-width: 1024px) {
+            .hero-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .hero-content h1 {
+            margin-bottom: var(--space-6);
+        }
+
+        .hero-content p {
+            font-size: var(--text-lg);
+            margin-bottom: var(--space-8);
+            max-width: 540px;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-4);
+        }
+
+        .hero-image-wrapper {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 4/5;
+            border-radius: 2rem 12rem 2rem 2rem;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+        }
+
+        @media (min-width: 1024px) {
+            .hero-image-wrapper {
+                aspect-ratio: 1/1;
+            }
+        }
+
+        .hero-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Services Section (Grid) */
+        .services {
+            background-color: var(--color-surface);
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto var(--space-16);
+        }
+
+        .section-header h2 {
+            margin-bottom: var(--space-4);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--space-6);
+        }
+
+        @media (min-width: 640px) {
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .services-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        .service-card {
+            background: var(--color-bg);
+            padding: var(--space-8);
+            border-radius: 4px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.03);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.06);
+            background: var(--color-surface);
+        }
+
+        .service-card h3 {
+            font-size: var(--text-xl);
+            margin-bottom: var(--space-4);
+            color: var(--color-accent);
+        }
+
+        .service-card p {
+            font-size: var(--text-sm);
+            margin-bottom: 0;
+            flex-grow: 1;
+        }
+
+        /* Leistungen (Why Us) Section */
+        .leistungen {
+            background-color: var(--color-accent-light);
+            position: relative;
+        }
+
+        .leistungen-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--space-12);
+            align-items: center;
+        }
+
+        @media (min-width: 1024px) {
+            .leistungen-grid {
+                grid-template-columns: 5fr 7fr;
+            }
+        }
+
+        .leistungen-image {
+            height: 400px;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,119,182,0.1);
+        }
+
+        .leistungen-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .leistungen-content h2 {
+            margin-bottom: var(--space-6);
+        }
+
+        .leistungen-content p {
+            font-size: var(--text-lg);
+            color: var(--color-text);
+        }
+
+        /* Maintenance Section (Asymmetric) */
+        .maintenance {
+            background-color: var(--color-bg);
+        }
+
+        .maintenance-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--space-12);
+        }
+
+        @media (min-width: 1024px) {
+            .maintenance-grid {
+                grid-template-columns: 7fr 5fr;
+                align-items: center;
+            }
+        }
+
+        .maintenance-content h2 {
+            margin-bottom: var(--space-6);
+        }
+
+        .maintenance-content h3 {
+            font-size: var(--text-lg);
+            margin: var(--space-6) 0 var(--space-2);
+            color: var(--color-text);
+        }
+
+        .maintenance-image {
+            height: 500px;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .maintenance-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Footer */
+        .site-footer {
+            background-color: var(--color-footer-bg);
+            color: #A0AEC0;
+            padding: clamp(4rem, 8vw, 7rem) 0 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--space-12);
+            margin-bottom: var(--space-12);
+        }
+
+        @media (min-width: 768px) {
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .footer-grid {
+                grid-template-columns: 2fr 1fr 1fr;
+            }
+        }
+
+        .footer-brand .logo {
+            color: var(--color-surface);
+            margin-bottom: var(--space-4);
+            display: inline-block;
+        }
+
+        .footer-brand p {
+            color: inherit;
+            max-width: 300px;
+        }
+
+        .footer-heading {
+            color: var(--color-surface);
+            font-family: var(--font-heading);
+            font-size: var(--text-base);
+            margin-bottom: var(--space-6);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: var(--space-3);
+        }
+
+        .footer-links a, .footer-links button {
+            color: inherit;
+            background: none;
+            border: none;
+            font-family: var(--font-body);
+            font-size: 1rem;
+            cursor: pointer;
+            padding: 0;
+            text-align: left;
+            transition: color 0.2s ease;
+        }
+
+        .footer-links a:hover, .footer-links button:hover {
+            color: var(--color-surface);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-3);
+            margin-bottom: var(--space-4);
+        }
+
+        .contact-item i {
+            color: var(--color-accent);
+            margin-top: 2px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: var(--space-6);
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-4);
+            font-size: var(--text-xs);
+            text-align: center;
+        }
+
+        @media (min-width: 768px) {
+            .footer-bottom {
+                flex-direction: row;
+                justify-content: space-between;
+                text-align: left;
+            }
+        }
+
+        /* Modals */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background-color: rgba(17, 21, 29, 0.8);
+            z-index: var(--z-modal);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-4);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            backdrop-filter: blur(4px);
+        }
+
+        .modal-overlay.is-open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-card {
+            background-color: var(--color-surface);
+            width: 100%;
+            max-width: 480px;
+            padding: var(--space-8);
+            border-radius: 4px;
+            position: relative;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.is-open .modal-card {
+            transform: translateY(0);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--color-text-muted);
+            padding: 0.5rem;
+            transition: color 0.2s ease;
+        }
+
+        .modal-close:hover {
+            color: var(--color-alert);
+        }
+
+        .modal-card h3 {
+            margin-bottom: var(--space-4);
+            padding-right: var(--space-8);
+        }
+
+        .modal-card p {
+            margin-bottom: var(--space-6);
+        }
+
+        .demo-links {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-3);
+            margin-top: var(--space-6);
+        }
+
+        .demo-links a {
+            color: var(--color-accent);
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Cookie Banner */
+        .cookie-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: var(--color-surface);
+            padding: var(--space-6);
+            box-shadow: 0 -10px 40px rgba(0,0,0,0.1);
+            z-index: var(--z-toast);
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-4);
+            transform: translateY(100%);
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .cookie-banner.is-visible {
+            transform: translateY(0);
+        }
+
+        @media (min-width: 768px) {
+            .cookie-banner {
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+                padding: var(--space-4) var(--space-8);
+            }
+        }
+
+        .cookie-text p {
+            margin: 0;
+            font-size: var(--text-sm);
+        }
+
+        .cookie-actions {
+            display: flex;
+            gap: var(--space-4);
+        }
+
+        /* Scroll Reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(22px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .reveal { opacity: 1; transform: none; transition: none; }
+        }
+
+        /* Skip Link */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--color-accent);
+            color: white;
+            padding: 8px;
+            z-index: var(--z-toast);
+            transition: top 0.2s;
+        }
+        .skip-link:focus {
+            top: 0;
+        }
+    </style>
+</head>
+<body>
+<!-- DEMO NOTICE BANNER - benedictjaros.com -->
+<style>
+#__demo_spacer{display:block;}
+#__demo_notice,#__demo_notice *{box-sizing:border-box;margin:0;padding:0;}
+#__demo_notice{
+  position:fixed;top:0;left:0;right:0;z-index:99999;
+  background:rgba(9,9,11,.97);
+  backdrop-filter:blur(14px) saturate(160%);
+  -webkit-backdrop-filter:blur(14px) saturate(160%);
+  border-bottom:1px solid rgba(255,255,255,.07);
+  font-family:system-ui,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;
+}
+#__demo_inner{
+  max-width:1280px;margin:0 auto;
+  padding:0 44px 0 18px;min-height:38px;
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+}
+#__demo_dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;background:#f5c842;box-shadow:0 0 7px rgba(245,200,66,.55);}
+#__demo_label{color:#f5c842;font-weight:700;font-size:10px;letter-spacing:.12em;text-transform:uppercase;flex-shrink:0;}
+#__demo_divider{color:rgba(255,255,255,.15);font-size:12px;flex-shrink:0;}
+#__demo_text{color:rgba(255,255,255,.45);font-size:11.5px;line-height:1.45;flex:1 1 160px;}
+#__demo_links{display:flex;align-items:center;gap:6px;flex-shrink:0;}
+#__demo_links a{
+  color:rgba(255,255,255,.38);font-size:11px;text-decoration:none;
+  border-bottom:1px solid rgba(255,255,255,.14);
+  transition:color .15s,border-color .15s;white-space:nowrap;
+}
+#__demo_links a:hover{color:rgba(255,255,255,.75);border-color:rgba(255,255,255,.4);}
+#__demo_link_sep{color:rgba(255,255,255,.15);font-size:10px;}
+#__demo_close{
+  position:absolute;right:0;top:0;bottom:0;width:40px;
+  background:none;border:none;cursor:pointer;
+  color:rgba(255,255,255,.28);font-size:16px;line-height:1;
+  display:flex;align-items:center;justify-content:center;
+  transition:color .15s;
+}
+#__demo_close:hover{color:rgba(255,255,255,.7);}
+@media(max-width:560px){
+  #__demo_inner{padding:7px 44px 7px 14px;gap:6px;}
+  #__demo_text{font-size:11px;flex:1 1 100%;order:3;}
+  #__demo_dot,#__demo_label{order:1;}
+  #__demo_divider{order:2;}
+  #__demo_links{order:4;}
+}
+</style>
+<div id="__demo_spacer"></div>
+<div id="__demo_notice" role="banner" aria-label="Demo notice">
+  <div id="__demo_inner">
+    <span id="__demo_dot"></span>
+    <span id="__demo_label">Demo</span>
+    <span id="__demo_divider">/</span>
+    <span id="__demo_text">Unofficial remake &mdash; not the real website. All content &amp; trademarks belong to their owners.</span>
+    <div id="__demo_links">
+      <a href="https://benedictjaros.com/impressum" target="_blank" rel="noopener noreferrer">Impressum</a>
+      <span id="__demo_link_sep">&middot;</span>
+      <a href="https://benedictjaros.com/datenschutz" target="_blank" rel="noopener noreferrer">Datenschutz</a>
+    </div>
+  </div>
+  <button id="__demo_close" aria-label="Close demo notice">&#x2715;</button>
+</div>
+<script>
+(function () {
+  var spacer = document.getElementById('__demo_spacer');
+  var b = document.getElementById('__demo_notice');
+  var x = document.getElementById('__demo_close');
+  if (!b || !spacer) return;
+  function sync() { spacer.style.height = b.offsetHeight + 'px'; }
+  function hide() {
+    b.style.display = 'none'; spacer.style.height = '0';
+    try { sessionStorage.setItem('__demo_closed', '1'); } catch (e) {}
+  }
+  try { if (sessionStorage.getItem('__demo_closed')) { b.style.display = 'none'; spacer.style.height = '0'; return; } } catch (e) {}
+  sync();
+  window.addEventListener('resize', function () { if (b.style.display !== 'none') sync(); });
+  if (x) x.addEventListener('click', hide);
+}());
+</script>
+
+    <a href="#main" class="skip-link">Zum Hauptinhalt springen</a>
+
+    <header class="site-header" id="header">
+        <div class="container header-inner">
+            <a href="#" class="logo">AB Gebäudetechnik</a>
+            
+            <nav class="desktop-nav" aria-label="Hauptnavigation">
+                <ul class="nav-links">
+                    <li><a href="#leistungen">Leistungen</a></li>
+                    <li><a href="#wartung">Wartung</a></li>
+                    <li><button type="button" class="btn-outline" style="border:none; padding:0; font-family:var(--font-heading); font-weight:500; font-size:var(--text-sm); cursor:pointer;" data-placeholder="Galerie">Galerie</button></li>
+                    <li><button type="button" class="btn-outline" style="border:none; padding:0; font-family:var(--font-heading); font-weight:500; font-size:var(--text-sm); cursor:pointer;" data-placeholder="Team">Team</button></li>
+                </ul>
+                <a href="#kontakt" class="btn btn-alert icon-text">
+                    <i data-lucide="phone"></i> 24h Notdienst
+                </a>
+            </nav>
+
+            <button class="nav-toggle" aria-expanded="false" aria-label="Menü öffnen">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <div class="mobile-overlay" id="mobile-menu">
+        <ul class="mobile-nav-links">
+            <li><a href="#leistungen" class="mobile-link">Leistungen</a></li>
+            <li><a href="#wartung" class="mobile-link">Wartung</a></li>
+            <li><a href="#" class="mobile-link" data-placeholder="Galerie">Galerie</a></li>
+            <li><a href="#" class="mobile-link" data-placeholder="Team">Team</a></li>
+            <li><a href="#kontakt" class="mobile-link" style="color: var(--color-alert);">24h Notdienst</a></li>
+        </ul>
+    </div>
+
+    <main id="main">
+        <section class="hero">
+            <div class="container hero-grid">
+                <div class="hero-content">
+                    <h1 class="reveal">Energieeffizienz und Wirtschaftlichkeit.</h1>
+                    <p class="reveal" style="--i:1">Klimawandel und die steigenden Energiepreise betreffen besonders den Gebäudetechnikbereich. Wir bieten zukunftssichere Lösungen für Ihr Zuhause.</p>
+                    <div class="hero-actions reveal" style="--i:2">
+                        <a href="#leistungen" class="btn btn-primary icon-text">
+                            Leistungen ansehen <i data-lucide="arrow-right"></i>
+                        </a>
+                        <button type="button" class="btn btn-outline" data-placeholder="Inspektion">
+                            Inspektion anfragen
+                        </button>
+                    </div>
+                </div>
+                <div class="hero-image reveal" style="--i:3">
+                    <div class="hero-image-wrapper">
+                        <img src="https://www.ab-gebaudetechnik.at/images/sampledata/asimage/slider/slide2.png?1779009440155" alt="Klares Wasser als Symbol für saubere Haustechnik" loading="eager">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="leistungen" class="services">
+            <div class="container">
+                <div class="section-header reveal">
+                    <h2>Unsere Kernkompetenzen</h2>
+                    <p>Präzise Installation und zuverlässiger Service in allen Bereichen der modernen Haustechnik.</p>
+                </div>
+                <div class="services-grid">
+                    <div class="service-card reveal" style="--i:0">
+                        <h3>Gas</h3>
+                        <p>Sichere und effiziente Gasinstallationen, Überprüfungen und Wartung für Ihr Zuhause. Höchste Sicherheitsstandards garantiert.</p>
+                    </div>
+                    <div class="service-card reveal" style="--i:1">
+                        <h3>Wasser</h3>
+                        <p>Wasser ist eines unserer kostbarsten Güter. Wir sorgen für perfekte Sanitärtechnik, sauberes Trinkwasser und moderne Bäder.</p>
+                    </div>
+                    <div class="service-card reveal" style="--i:2">
+                        <h3>Heizung</h3>
+                        <p>Moderne, energieeffiziente Heizsysteme und Wärmepumpen für maximalen Komfort und geringere Energiekosten.</p>
+                    </div>
+                    <div class="service-card reveal" style="--i:3">
+                        <h3>Lüftung</h3>
+                        <p>Frische Luft und optimales Raumklima durch smarte Lüftungstechnik. Wichtig für Gesundheit und Bausubstanz.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="leistungen">
+            <div class="container leistungen-grid">
+                <div class="leistungen-image reveal">
+                    <img src="https://www.ab-gebaudetechnik.at/images/kundendienst.jpg" alt="Techniker bei der Arbeit" loading="lazy">
+                </div>
+                <div class="leistungen-content reveal" style="--i:1">
+                    <h2>Qualität, Kompetenz, Service</h2>
+                    <p>Wir bieten Ihnen die Leistungen eines Sanitär-, Heizungs-, Kälte-, und Klimabetriebes. Ob Neubau, Umbau, Sanierung, Revitalisierung, Kundendienst oder Service, bei uns sind Sie in besten Händen!</p>
+                    <p>Unser erfahrenes Team aus Klagenfurt steht für handwerkliche Präzision und termingerechte Ausführung.</p>
+                    <br>
+                    <a href="#kontakt" class="btn btn-primary">Kontakt aufnehmen</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="wartung" class="maintenance">
+            <div class="container maintenance-grid">
+                <div class="maintenance-content reveal">
+                    <h2>Warme Gedanken reichen nicht immer...</h2>
+                    <p>Regelmäßige Wartung schützt vor überraschenden Ausfällen und verlängert die Lebensdauer Ihrer Anlagen. Wir übernehmen gerne Ihre Wartung.</p>
+                    
+                    <h3>Heizung Service - Neubau</h3>
+                    <p>Bei neuen Anlagen sichert ein regelmäßiges Service die Garantieansprüche gegenüber dem Hersteller und garantiert einen optimalen, energiesparenden Betrieb ab dem ersten Tag.</p>
+                    
+                    <h3>Heizung Service - Altbau</h3>
+                    <p>Bei bestehenden Anlagen minimiert ein professionelles Service das Ausfallrisiko, optimiert die Verbrennungswerte und hilft so, Heizkosten spürbar zu senken.</p>
+                </div>
+                <div class="maintenance-image reveal" style="--i:1">
+                    <img src="https://www.ab-gebaudetechnik.at/images/thermostat.jpg" alt="Modernes Raumthermostat" loading="lazy">
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer id="kontakt" class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <span class="logo">AB Gebäudetechnik</span>
+                    <p>Moderne österreichische Ingenieurskunst für Sanitär, Heizung und Klima in Kärnten.</p>
+                </div>
+                
+                <div class="footer-contact">
+                    <h4 class="footer-heading">Kontakt</h4>
+                    <div class="contact-item">
+                        <i data-lucide="map-pin"></i>
+                        <span>Koningsberger Str. 3<br>9020 Klagenfurt am Wörthersee</span>
+                    </div>
+                    <div class="contact-item">
+                        <i data-lucide="phone"></i>
+                        <span>Büro: +43 463 89 00 59</span>
+                    </div>
+                    <div class="contact-item">
+                        <i data-lucide="mail"></i>
+                        <span>office@ab-gebaudetechnik.at</span>
+                    </div>
+                </div>
+
+                <div class="footer-legal">
+                    <h4 class="footer-heading">Rechtliches</h4>
+                    <ul class="footer-links">
+                        <li><button type="button" data-legal="impressum">Impressum</button></li>
+                        <li><button type="button" data-legal="datenschutz">Datenschutzerklärung</button></li>
+                        <li><button type="button" data-legal="agb">AGB</button></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>© 2026 AB Gebäudetechnik — All original content, images & trademarks are property of their respective owners. Website rebuilt by Benedict Jaros.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Placeholder Feature Modal -->
+    <div class="modal-overlay" id="placeholder-modal" role="dialog" aria-modal="true" aria-labelledby="placeholder-title">
+        <div class="modal-card">
+            <button class="modal-close" aria-label="Schließen" data-close-modal>
+                <i data-lucide="x"></i>
+            </button>
+            <h3 id="placeholder-title">Feature Name</h3>
+            <p>This feature will be live once the website is launched and configured. Contact us in the meantime — we'd love to hear from you.</p>
+            <button class="btn btn-primary" data-close-modal>Verstanden</button>
+        </div>
+    </div>
+
+    <!-- Legal Demo Modal -->
+    <div class="modal-overlay" id="legal-modal" role="dialog" aria-modal="true" aria-labelledby="legal-title">
+        <div class="modal-card">
+            <button class="modal-close" aria-label="Schließen" data-close-modal>
+                <i data-lucide="x"></i>
+            </button>
+            <h3 id="legal-title">Rechtliche Hinweise</h3>
+            <p>Diese Website ist ein Demo-Remake und wurde nicht von oder für das Unternehmen erstellt. Die Inhalte dienen ausschließlich Demonstrationszwecken. Für unsere eigenen rechtlichen Informationen:</p>
+            <div class="demo-links">
+                <a href="https://benedictjaros.com/impressum" target="_blank" rel="noopener"><i data-lucide="external-link" style="width:16px;height:16px;"></i> Impressum</a>
+                <a href="https://benedictjaros.com/datenschutz" target="_blank" rel="noopener"><i data-lucide="external-link" style="width:16px;height:16px;"></i> Datenschutz</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cookie Banner -->
+    <div class="cookie-banner" id="cookie-banner" role="region" aria-label="Cookie Einwilligung">
+        <div class="cookie-text">
+            <p>Wir verwenden Cookies, um Ihre Erfahrung auf unserer Website zu verbessern. Notwendige Cookies sind für den Betrieb erforderlich.</p>
+        </div>
+        <div class="cookie-actions">
+            <button class="btn btn-outline" id="cookie-decline">Ablehnen</button>
+            <button class="btn btn-primary" id="cookie-accept">Ja, das ist okay</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize Icons
+            lucide.createIcons();
+
+            // Sticky Header
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            }, { passive: true });
+
+            // Mobile Navigation
+            const navToggle = document.querySelector('.nav-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileLinks = document.querySelectorAll('.mobile-link');
+            let isMenuOpen = false;
+
+            function toggleMenu() {
+                isMenuOpen = !isMenuOpen;
+                navToggle.setAttribute('aria-expanded', isMenuOpen);
+                navToggle.setAttribute('aria-label', isMenuOpen ? 'Menü schließen' : 'Menü öffnen');
+                
+                if (isMenuOpen) {
+                    mobileMenu.classList.add('is-open');
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    mobileMenu.classList.remove('is-open');
+                    document.body.style.overflow = '';
+                }
+            }
+
+            navToggle.addEventListener('click', toggleMenu);
+
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (isMenuOpen) toggleMenu();
+                });
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && isMenuOpen) toggleMenu();
+            });
+
+            // Scroll Reveal
+            const revealElements = document.querySelectorAll('.reveal');
+            const revealOptions = {
+                threshold: 0.12,
+                rootMargin: "0px 0px -50px 0px"
+            };
+
+            const revealObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, revealOptions);
+
+            revealElements.forEach(el => revealObserver.observe(el));
+
+            // Modals Logic
+            const placeholderModal = document.getElementById('placeholder-modal');
+            const placeholderTitle = document.getElementById('placeholder-title');
+            const legalModal = document.getElementById('legal-modal');
+            
+            function openModal(modal) {
+                modal.classList.add('is-open');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeModals() {
+                placeholderModal.classList.remove('is-open');
+                legalModal.classList.remove('is-open');
+                if (!isMenuOpen) {
+                    document.body.style.overflow = '';
+                }
+            }
+
+            // Placeholder Triggers
+            document.querySelectorAll('[data-placeholder]').forEach(trigger => {
+                trigger.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const featureName = trigger.getAttribute('data-placeholder');
+                    placeholderTitle.textContent = featureName;
+                    openModal(placeholderModal);
+                });
+            });
+
+            // Legal Triggers
+            document.querySelectorAll('[data-legal]').forEach(trigger => {
+                trigger.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    openModal(legalModal);
+                });
+            });
+
+            // Close Modal Events
+            document.querySelectorAll('[data-close-modal]').forEach(btn => {
+                btn.addEventListener('click', closeModals);
+            });
+
+            document.querySelectorAll('.modal-overlay').forEach(overlay => {
+                overlay.addEventListener('click', (e) => {
+                    if (e.target === overlay) closeModals();
+                });
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') closeModals();
+            });
+
+            // Cookie Banner
+            const cookieBanner = document.getElementById('cookie-banner');
+            const btnAccept = document.getElementById('cookie-accept');
+            const btnDecline = document.getElementById('cookie-decline');
+            
+            const cookieConsent = localStorage.getItem('cookie_consent');
+            
+            if (!cookieConsent) {
+                setTimeout(() => {
+                    cookieBanner.classList.add('is-visible');
+                }, 1000);
+            }
+
+            function handleCookieChoice(choice) {
+                localStorage.setItem('cookie_consent', choice);
+                cookieBanner.classList.remove('is-visible');
+            }
+
+            btnAccept.addEventListener('click', () => handleCookieChoice('accepted'));
+            btnDecline.addEventListener('click', () => handleCookieChoice('declined'));
+        });
+    </script>
+</body>
+</html>
